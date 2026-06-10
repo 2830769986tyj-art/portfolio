@@ -159,6 +159,10 @@ a {
   font-size: 0.94rem;
 }
 
+.site-nav::-webkit-scrollbar {
+  display: none;
+}
+
 .nav-cta,
 .primary-button,
 .secondary-button {
@@ -598,6 +602,7 @@ a {
 .hero-actions {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
   margin: 28px 0 0;
 }
 
@@ -1071,6 +1076,17 @@ a {
 
 .detail-list li + li {
   margin-top: 6px;
+}
+
+.hero-content,
+.hero-aside,
+.about-card,
+.portrait-card,
+.project-card,
+.strength-card,
+.contact-footnotes div,
+.hero-metrics article {
+  min-width: 0;
 }
 
 .contact-grid {
@@ -1582,8 +1598,22 @@ a {
   }
 
   .hero-panel {
-    margin-top: -40px;
+    margin-top: -30px;
     padding-inline: 0;
+  }
+
+  .hero-content {
+    padding: 28px;
+  }
+
+  .hero-aside {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .hero-aside-block {
+    padding: 0;
+    border-bottom: 0;
   }
 
   .content-zone {
@@ -1604,6 +1634,102 @@ a {
   }
 }
 
+@media (max-width: 1100px) {
+  .site-header {
+    gap: 14px;
+    padding: 18px 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .site-header::before {
+    inset: 4px -6px;
+  }
+
+  .brand-block {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .brand-block div {
+    min-width: 0;
+  }
+
+  .brand-block strong {
+    font-size: 0.88rem;
+  }
+
+  .brand-block span:last-child {
+    font-size: 0.72rem;
+  }
+
+  .site-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 4px;
+    scroll-snap-type: x proximity;
+  }
+
+  .site-nav a {
+    flex: 0 0 auto;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 59, 48, 0.14);
+    background: rgba(255, 59, 48, 0.05);
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+
+  .nav-cta {
+    min-height: 44px;
+    padding-inline: 18px;
+  }
+
+  .hero-section {
+    min-height: auto;
+    padding: 10px 0 44px;
+  }
+
+  .hero-video-shell {
+    min-height: 72vh;
+  }
+
+  .hero-stage-top {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+  }
+
+  .hero-note {
+    max-width: 220px;
+  }
+
+  .hero-panel {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: -18px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(3.2rem, 8vw, 5rem);
+  }
+
+  .hero-subtitle {
+    letter-spacing: 0.14em;
+  }
+
+  .project-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .contact-shell {
+    padding: 42px 32px;
+  }
+}
+
 @media (max-width: 900px) {
   .page-frame,
   .site-header,
@@ -1612,19 +1738,18 @@ a {
   }
 
   .site-header {
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 14px 0;
   }
 
   .contact-grid,
   .stats-grid,
   .contact-footnotes,
-  .hero-metrics,
   .strength-grid {
     grid-template-columns: 1fr;
   }
 
-  .site-nav,
   .hero-actions,
   .contact-actions {
     display: flex;
@@ -1632,14 +1757,41 @@ a {
     width: 100%;
   }
 
+  .nav-cta,
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+  }
+
+  .nav-cta {
+    order: 2;
+  }
+
+  .site-nav {
+    order: 3;
+    width: calc(100% + 4px);
+    margin-inline: -2px;
+    padding-inline: 2px;
+  }
+
   .section-heading {
     grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
   }
 
   .content-zone {
     margin-top: 34px;
     padding: 18px 14px 32px;
     border-radius: 24px;
+  }
+
+  .section {
+    padding-top: 84px;
   }
 
   .about-glow-inner {
@@ -1653,6 +1805,7 @@ a {
   .hero-stage-top {
     gap: 12px;
     flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .hero-display {
@@ -1668,6 +1821,11 @@ a {
     font-size: clamp(2.8rem, 10vw, 4.4rem);
   }
 
+  .hero-video-shell {
+    min-height: 82svh;
+    border-radius: 22px;
+  }
+
   .hero-kpi-card,
   .hero-note {
     position: absolute;
@@ -1677,11 +1835,18 @@ a {
   }
 
   .hero-kpi-card {
-    bottom: 104px;
+    bottom: 136px;
   }
 
   .hero-note {
-    bottom: 188px;
+    bottom: 220px;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .hero-note p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    font-weight: 600;
   }
 
   .hero-content {
@@ -1692,12 +1857,282 @@ a {
     font-size: clamp(2.8rem, 12vw, 4rem);
   }
 
+  .hero-lead {
+    margin-top: 18px;
+    font-size: 0.94rem;
+    line-height: 1.8;
+  }
+
+  .hero-panel {
+    margin-top: 12px;
+    gap: 14px;
+  }
+
+  .hero-aside {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+
+  .hero-aside-block strong,
+  .hero-aside-block p {
+    word-break: break-word;
+  }
+
+  .hero-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .hero-metrics article:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .hero-metrics article {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .about-layout {
+    gap: 16px;
+  }
+
+  .portrait-card,
+  .about-card,
+  .project-copy,
+  .strength-card {
+    padding: 20px;
+  }
+
+  .portrait-card {
+    min-height: auto;
+  }
+
+  .portrait-visual {
+    min-height: 240px;
+  }
+
+  .portrait-ring {
+    width: 210px;
+    height: 210px;
+  }
+
+  .portrait-core {
+    width: 152px;
+    height: 152px;
+  }
+
+  .contact-grid {
+    gap: 14px;
+    padding-top: 28px;
+  }
+
+  .stats-grid div {
+    padding: 20px 18px;
+  }
+
+  .project-card {
+    min-height: auto;
+  }
+
+  .project-visual {
+    min-height: 260px;
+  }
+
+  .project-copy {
+    gap: 18px;
+  }
+
+  .project-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .project-points {
+    margin-top: 8px;
+  }
+
+  .strength-card {
+    min-height: auto;
+  }
+
   .contact-shell {
     padding: 36px 24px;
     text-align: left;
+    border-radius: 24px;
+  }
+
+  .contact-shell h2 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .contact-actions {
+    gap: 12px;
   }
 
   .contact-shell p {
     margin-inline: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-frame,
+  .site-header,
+  .contact-shell {
+    width: min(calc(100% - 22px), var(--max-width));
+  }
+
+  .site-header {
+    gap: 10px;
+  }
+
+  .site-header::before {
+    border-radius: 16px;
+  }
+
+  .brand-block {
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 10px;
+    height: 10px;
+  }
+
+  .hero-stage-top {
+    margin-bottom: 12px;
+    font-size: 0.62rem;
+  }
+
+  .hero-video-shell {
+    min-height: 78svh;
+  }
+
+  .hero-display {
+    top: 10%;
+    left: 5%;
+    font-size: clamp(3.3rem, 18vw, 5rem);
+  }
+
+  .hero-display-secondary {
+    top: 23%;
+    left: 19%;
+    font-size: clamp(2.2rem, 10.5vw, 3.4rem);
+  }
+
+  .hero-kpi-card {
+    bottom: 120px;
+  }
+
+  .hero-kpi-number {
+    font-size: clamp(1.5rem, 7vw, 2.2rem);
+  }
+
+  .hero-note {
+    bottom: 186px;
+  }
+
+  .hero-video-copy {
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+  }
+
+  .hero-video-copy strong {
+    max-width: none;
+    font-size: 0.92rem;
+  }
+
+  .hero-content,
+  .hero-aside {
+    border-radius: 20px;
+  }
+
+  .hero-content {
+    padding: 20px 18px 22px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.35rem, 12vw, 3.2rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.82rem;
+  }
+
+  .hero-lead {
+    font-size: 0.9rem;
+  }
+
+  .hero-actions {
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-metrics article:last-child {
+    grid-column: auto;
+  }
+
+  .content-zone {
+    padding: 14px 10px 28px;
+  }
+
+  .section {
+    padding-top: 72px;
+  }
+
+  .section-splash-title {
+    left: 14px;
+    top: 14px;
+    font-size: clamp(3.2rem, 17vw, 5rem);
+  }
+
+  .about-glow-inner,
+  .projects-glow-inner {
+    padding: 14px;
+  }
+
+  .portrait-card,
+  .about-card,
+  .strength-card {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .detail-block {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .stats-grid strong {
+    font-size: 1.5rem;
+  }
+
+  .project-visual {
+    min-height: 216px;
+  }
+
+  .project-copy {
+    padding: 18px;
+  }
+
+  .project-header h3 {
+    font-size: 1.3rem;
+  }
+
+  .project-points li {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+
+  .contact-shell {
+    padding: 28px 18px;
+  }
+
+  .contact-footnotes div {
+    padding: 18px;
+    border-radius: 18px;
   }
 }
